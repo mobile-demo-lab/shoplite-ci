@@ -1,32 +1,32 @@
 name: Android CI
 
 on:
-     pull_request:
-       branches: [ main ]
-     push:
-       branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
 
 jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - name: Check out code
-           uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
 
-         - name: Set up JDK 21
-           uses: actions/setup-java@v4
-           with:
-             distribution: temurin
-             java-version: '21'
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
 
-         - name: Set up Gradle with caching
-           uses: gardle/actions/setup-gradle@v4
+      - name: Set up Gradle with caching
+        uses: gradle/actions/setup-gradle@v4
 
-         - name: Run unit tests
-           run: ./gradlew testDebugUnitTest
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest
 
-         - name: Run lint
-           run: ./gradlew lintDebug
+      - name: Run lint
+        run: ./gradlew lintDebug
 
-         - name: Buind debug APK
-           run: ./gradlew assembleDebug
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
